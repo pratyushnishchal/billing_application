@@ -21,7 +21,7 @@ function AdminLoginPage() {
                 window.localStorage.setItem("userType", data.role); 
                 window.localStorage.setItem("loggedIn", "true");
                 localStorage.setItem("id", data.id);
-                navigate('/dashboard');  // Redirect to the dashboard
+                navigate('https://invoicify-billingapplication-k1d338582.vercel.app/dashboard');  // Redirect to the dashboard
             } else {
                 alert("Invalid credentials");
             }

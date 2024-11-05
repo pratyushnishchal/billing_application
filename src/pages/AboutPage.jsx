@@ -15,9 +15,9 @@ const AboutPage = () => {
                     <nav className="flex space-x-8">
                         <NavLink text="Home" href="/" />
                         <NavLink text="Features" href="/#features" />
-                        <NavLink text="About" href="/about" />
-                        <NavLink text="Contact" href="/contact" />
-                        <NavLink text="Login" href="/#login" className="mr-4" />
+                        <NavLink text="About" href="https://invoicify-billingapplication-k1d338582.vercel.app/about" />
+                        <NavLink text="Contact" href="https://invoicify-billingapplication-k1d338582.vercel.app/contact" />
+                        <NavLink text="Login" href="https://invoicify-billingapplication-k1d338582.vercel.app/#login" className="mr-4" />
                     </nav>
                 </div>
             </header>
