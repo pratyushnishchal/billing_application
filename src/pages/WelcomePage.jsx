@@ -61,13 +61,13 @@ const WelcomePage = () => {
               />
               <NavLink
                 text="About"
-                href="/about"
+                href="https://invoicify-billingapplication.vercel.app/about"
                 className="w-full"
                 onClick={toggleMenu}
               />
               <NavLink
                 text="Contact"
-                href="/contact"
+                href="https://invoicify-billingapplication.vercel.app/contact"
                 className="w-full"
                 onClick={toggleMenu}
               />
@@ -235,7 +235,7 @@ const loginOptions = [
     description: "Access all features as an administrator.",
     buttonText: "Admin Login",
     bgColor: "bg-blue-500",
-    link: "/admin-login",
+    link: "https://invoicify-billingapplication.vercel.app/admin-login",
     icon: <FaUserShield className="text-4xl" />,
     iconColor: "text-blue-600",
   },
@@ -244,7 +244,7 @@ const loginOptions = [
     description: "Manage invoices and client accounts.",
     buttonText: "Accountant Login",
     bgColor: "bg-green-500",
-    link: "/accountant-login",
+    link: "https://invoicify-billingapplication.vercel.app/accountant-login",
     icon: <FaUserTie className="text-4xl text-green-600" />,
     iconColor: "text-green-600",
   },
@@ -253,7 +253,7 @@ const loginOptions = [
     description: "View and manage your billing information.",
     buttonText: "Customer Login",
     bgColor: "bg-yellow-500",
-    link: "/customer-login",
+    link: "https://invoicify-billingapplication.vercel.app/customer-login",
     icon: <FaUserCircle className="text-4xl text-yellow-600" />,
     iconColor: "text-yellow-600",
   },
