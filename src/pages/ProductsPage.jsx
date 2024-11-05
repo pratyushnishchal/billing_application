@@ -173,7 +173,7 @@ const ProductsPage = () => {
                   name="prodName"
                   value={formData.prodName}
                   onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
+                  className="w-full border p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -185,7 +185,7 @@ const ProductsPage = () => {
                   name="prodDescription"
                   value={formData.prodDescription}
                   onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
+                  className="w-full border p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -197,7 +197,7 @@ const ProductsPage = () => {
                   name="productCategory"
                   value={formData.productCategory}
                   onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
+                  className="w-full border p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -209,7 +209,7 @@ const ProductsPage = () => {
                   name="price"
                   value={formData.price}
                   onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
+                  className="w-full border p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -247,7 +247,7 @@ const ProductsPage = () => {
                   name="prodName"
                   value={newProducts.prodName}
                   onChange={handleInputChangeForNewProduct}
-                  className="w-full p-2 rounded"
+                  className="w-full p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -258,7 +258,7 @@ const ProductsPage = () => {
                   name="price"
                   value={newProducts.price}
                   onChange={handleInputChangeForNewProduct}
-                  className="w-full p-2 rounded"
+                  className="w-full p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -269,7 +269,7 @@ const ProductsPage = () => {
                   name="prodDescription"
                   value={newProducts.prodDescription}
                   onChange={handleInputChangeForNewProduct}
-                  className="w-full p-2 rounded"
+                  className="w-full p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
@@ -280,7 +280,7 @@ const ProductsPage = () => {
                   name="productCategory"
                   value={newProducts.productCategory}
                   onChange={handleInputChangeForNewProduct}
-                  className="w-full p-2 rounded"
+                  className="w-full p-2 rounded text-black" // Added text-black
                   required
                 />
               </div>
