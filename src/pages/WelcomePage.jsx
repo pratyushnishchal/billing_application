@@ -21,8 +21,8 @@ const WelcomePage = () => {
           <nav className="hidden md:flex space-x-4 lg:space-x-8">
             <NavLink text="Home" href="/" />
             <NavLink text="Features" href="#features" />
-            <NavLink text="About" href="/about" />
-            <NavLink text="Contact" href="/contact" />
+            <NavLink text="About" href="https://invoicify-billingapplication.vercel.app/about" />
+            <NavLink text="Contact" href="https://invoicify-billingapplication.vercel.app/contact" />
             <NavLink text="Login" href="#login" className="mr-2" />
           </nav>
           {/* Hamburger Menu for Mobile */}
