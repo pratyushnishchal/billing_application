@@ -143,7 +143,7 @@ const AccountantProfile = () => {
                 <div>
                     <div className='flex flex-col sm:flex-row items-center mb-6'>
                         <img
-                            src='https://t4.ftcdn.net/jpg/04/75/00/99/360_F_475009987_zwsk4c77x3cTpcI3W1C1LU4pOSyPKaqi.jpg'
+                            src='https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?t=st=1730829058~exp=1730832658~hmac=42e64807dbcb16704b43fa5307132611fdf05f60c077311dfdc7d0043325d871&w=740'
                             alt='Profile'
                             className='rounded-full w-20 h-20 object-cover mr-4'
                         />

@@ -190,7 +190,7 @@ const CustomerSetting = () => {
                 <div>
                     <div className='flex flex-col sm:flex-row items-center mb-6'>
                         <img
-                            src='https://t4.ftcdn.net/jpg/04/75/00/99/360_F_475009987_zwsk4c77x3cTpcI3W1C1LU4pOSyPKaqi.jpg'
+                            src='https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1730829117~exp=1730832717~hmac=3393e224450ef37451682cb4153a59e33ffe4dfc67a077370943b50ef7ec8d4e&w=740'
                             alt='Profile'
                             className='rounded-full w-20 h-20 object-cover mr-4'
                         />
