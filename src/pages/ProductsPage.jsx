@@ -14,8 +14,8 @@ const ProductsPage = () => {
     inventoryValue: 0,
     totalRevenue: 0,
   });
-  const [isPopupOpen, setIsPopupOpen] = useState(false); 
-  const [selectedProduct, setSelectedProduct] = useState(null); 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [showAddProductsForm, setShowAddProductsForm] = useState(false);
   const [newProducts, setNewProducts] = useState({
     prodName: "",
@@ -29,7 +29,8 @@ const ProductsPage = () => {
     productCategory: "",
     price: "",
   });
-  const [products, setProducts] = useState([]); 
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -45,11 +46,13 @@ const ProductsPage = () => {
         const totalRevenueResponse = await fetch(`https://billing-application-backend-production.up.railway.app/analysis/totalSales`);
         const totalRevenue = await totalRevenueResponse.json();
 
+        console.log({ totalProducts, avgPrice, inventoryValue, totalRevenue }); // Log for debugging
+
         setStats({
           totalProducts,
           avgPrice,
           inventoryValue,
-          totalRevenue,
+          totalRevenue: Number(totalRevenue) || 0, // Ensure totalRevenue is a number or fallback to 0
         });
       } catch (error) {
         console.error("Error fetching stats:", error);
@@ -66,12 +69,13 @@ const ProductsPage = () => {
     };
 
     fetchStats();
-    fetchProducts(); 
+    fetchProducts();
   }, []);
 
   const handleAddProductClick = () => {
-    setShowAddProductsForm(true); 
+    setShowAddProductsForm(true);
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -85,16 +89,15 @@ const ProductsPage = () => {
     }));
   };
 
-  
   const handleEditClick = (product) => {
-    setSelectedProduct(product); 
+    setSelectedProduct(product);
     setFormData({
       prodName: product.prodName,
       prodDescription: product.prodDescription,
       productCategory: product.productCategory,
       price: product.price,
     });
-    setIsPopupOpen(true); 
+    setIsPopupOpen(true);
   };
 
   const handleClosePopup = () => {
@@ -118,9 +121,9 @@ const ProductsPage = () => {
     try {
       await axios.post("https://billing-application-backend-production.up.railway.app/api/admin/addProducts", newProducts);
       const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
-      setProducts(response.data); 
-      setShowAddProductsForm(false); 
-      setNewProducts({ prodName: "", price: "", prodDescription: "", productCategory: "" }); 
+      setProducts(response.data);
+      setShowAddProductsForm(false);
+      setNewProducts({ prodName: "", price: "", prodDescription: "", productCategory: "" });
     } catch (error) {
       console.error("There was an error adding the product!", error);
       alert("There was an error adding the product! Please try again.");
@@ -141,10 +144,9 @@ const ProductsPage = () => {
           <StatCard name="Total Products" icon={Package} value={stats.totalProducts} color="#6366F1" />
           <StatCard name="Avg. Price / Prod." icon={TrendingUp} value={stats.avgPrice.toFixed(2) || 0} color="#10B981" />
           <StatCard name="Inventory Value" icon={AlertTriangle} value={stats.inventoryValue || 0} color="#F59E0B" />
-          <StatCard name="Total Revenue" icon={DollarSign} value={`₹${stats.totalRevenue.toFixed(2) || 0}`} color="#EF4444" />
+          <StatCard name="Total Revenue" icon={DollarSign} value={`₹${(stats.totalRevenue && !isNaN(stats.totalRevenue)) ? stats.totalRevenue.toFixed(2) : 0}`} color="#EF4444" />
         </motion.div>
 
-        
         <button
           onClick={handleAddProductClick}
           className="bg-green-600 text-white px-4 py-2 rounded-lg mb-4"
@@ -152,15 +154,13 @@ const ProductsPage = () => {
           Add Product
         </button>
 
-        <ProductsTable products={products} onEditClick={handleEditClick} /> 
+        <ProductsTable products={products} onEditClick={handleEditClick} />
 
-        
         <div className="grid grid-col-1 lg gap-8">
           <CategoryDistributionChart />
         </div>
       </main>
 
-      
       {isPopupOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded-md shadow-lg">
@@ -231,7 +231,6 @@ const ProductsPage = () => {
         </div>
       )}
 
-      
       {showAddProductsForm && (
         <motion.div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
@@ -242,73 +241,56 @@ const ProductsPage = () => {
             <h2 className="text-lg font-bold text-gray-100 mb-4">Add Product</h2>
             <form onSubmit={handleSaveProduct}>
               <div className="mb-4">
-                <label className="block text-gray-400">Product Name</label>
+                <label className="block text-gray-300">Product Name</label>
                 <input
                   type="text"
                   name="prodName"
                   value={newProducts.prodName}
                   onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
+                  className="w-full p-2 rounded"
                   required
                 />
               </div>
-
               <div className="mb-4">
-                <label className="block text-gray-400">Product Description</label>
-                <input
-                  type="text"
-                  name="prodDescription"
-                  value={newProducts.prodDescription}
-                  onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-400">Category</label>
-                <input
-                  type="text"
-                  name="productCategory"
-                  value={newProducts.productCategory}
-                  onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-400">Price</label>
+                <label className="block text-gray-300">Price</label>
                 <input
                   type="number"
                   name="price"
                   value={newProducts.price}
                   onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
+                  className="w-full p-2 rounded"
                   required
                 />
               </div>
-
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setShowAddProductsForm(false)}
-                  className="bg-gray-600 text-white px-4 py-2 rounded-md mr-2"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md"
-                >
-                  Add Product
-                </button>
+              <div className="mb-4">
+                <label className="block text-gray-300">Description</label>
+                <input
+                  type="text"
+                  name="prodDescription"
+                  value={newProducts.prodDescription}
+                  onChange={handleInputChangeForNewProduct}
+                  className="w-full p-2 rounded"
+                  required
+                />
               </div>
+              <div className="mb-4">
+                <label className="block text-gray-300">Category</label>
+                <input
+                  type="text"
+                  name="productCategory"
+                  value={newProducts.productCategory}
+                  onChange={handleInputChangeForNewProduct}
+                  className="w-full p-2 rounded"
+                  required
+                />
+              </div>
+              <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+                Add Product
+              </button>
             </form>
           </div>
         </motion.div>
       )}
-
     </div>
   );
 };
