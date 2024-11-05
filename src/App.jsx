@@ -36,11 +36,11 @@ function App() {
         <Routes>
             {/* Public Routes */}
             <Route path="/" element={<WelcomePage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/admin-login" element={<AdminLoginPage setIsLoggedIn={setIsLoggedIn} setUserType={setUserType} />} />
-            <Route path="/accountant-login" element={<AccountantLoginPage />} />
-            <Route path="/customer-login" element={<CustomerLoginPage />} />
+            <Route path="https://invoicify-billingapplication.vercel.app/about" element={<AboutPage />} />
+            <Route path="https://invoicify-billingapplication.vercel.app/contact" element={<ContactUs />} />
+            <Route path="https://invoicify-billingapplication.vercel.app/admin-login" element={<AdminLoginPage setIsLoggedIn={setIsLoggedIn} setUserType={setUserType} />} />
+            <Route path="https://invoicify-billingapplication.vercel.app/accountant-login" element={<AccountantLoginPage />} />
+            <Route path="https://invoicify-billingapplication.vercel.app/customer-login" element={<CustomerLoginPage />} />
 
             {/* Protected Routes */}
             <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
