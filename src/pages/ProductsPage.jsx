@@ -7,6 +7,23 @@ import CategoryDistributionChart from "../components/overview/CategoryDistributi
 import ProductsTable from "../components/products/ProductsTable";
 import axios from "axios";
 
+// Notification Component
+const Notification = ({ message, type, onClose }) => {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onClose();
+    }, 3000); // Hide notification after 3 seconds
+
+    return () => clearTimeout(timer);
+  }, [onClose]);
+
+  return (
+    <div className={`fixed top-4 right-4 p-4 rounded shadow-lg ${type === "success" ? "bg-green-500" : "bg-red-500"} text-white`}>
+      {message}
+    </div>
+  );
+};
+
 const ProductsPage = () => {
   const [stats, setStats] = useState({
     totalProducts: 0,
@@ -29,7 +46,9 @@ const ProductsPage = () => {
     productCategory: "",
     price: "",
   });
-  const [products, setProducts] = useState([]); 
+  const [products, setProducts] = useState([]);
+  const [notification, setNotification] = useState({ visible: false, message: "", type: "" }); // Notification state
+
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -66,12 +85,17 @@ const ProductsPage = () => {
     };
 
     fetchStats();
-    fetchProducts(); 
+    fetchProducts();
   }, []);
 
-  const handleAddProductClick = () => {
-    setShowAddProductsForm(true); 
+  const showNotification = (message, type) => {
+    setNotification({ visible: true, message, type });
   };
+
+  const handleAddProductClick = () => {
+    setShowAddProductsForm(true);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -85,16 +109,15 @@ const ProductsPage = () => {
     }));
   };
 
-  
   const handleEditClick = (product) => {
-    setSelectedProduct(product); 
+    setSelectedProduct(product);
     setFormData({
       prodName: product.prodName,
       prodDescription: product.prodDescription,
       productCategory: product.productCategory,
       price: product.price,
     });
-    setIsPopupOpen(true); 
+    setIsPopupOpen(true);
   };
 
   const handleClosePopup = () => {
@@ -109,8 +132,10 @@ const ProductsPage = () => {
       handleClosePopup();
       const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
       setProducts(response.data);
+      showNotification("Product updated successfully!", "success");
     } catch (error) {
       console.error("Failed to update product", error);
+      showNotification("Failed to update product.", "error");
     }
   };
 
@@ -118,12 +143,13 @@ const ProductsPage = () => {
     try {
       await axios.post("https://billing-application-backend-production.up.railway.app/api/admin/addProducts", newProducts);
       const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
-      setProducts(response.data); 
-      setShowAddProductsForm(false); 
-      setNewProducts({ prodName: "", price: "", prodDescription: "", productCategory: "" }); 
+      setProducts(response.data);
+      setShowAddProductsForm(false);
+      setNewProducts({ prodName: "", price: "", prodDescription: "", productCategory: "" });
+      showNotification("Product added successfully!", "success");
     } catch (error) {
       console.error("There was an error adding the product!", error);
-      alert("There was an error adding the product! Please try again.");
+      showNotification("Error adding product. Please try again.", "error");
     }
   };
 
@@ -144,7 +170,6 @@ const ProductsPage = () => {
           <StatCard name="Total Revenue" icon={DollarSign} value={`₹${stats.totalRevenue.toFixed(2) || 0}`} color="#EF4444" />
         </motion.div>
 
-        
         <button
           onClick={handleAddProductClick}
           className="bg-green-600 text-white px-4 py-2 rounded-lg mb-4"
@@ -154,161 +179,20 @@ const ProductsPage = () => {
 
         <ProductsTable products={products} onEditClick={handleEditClick} /> 
 
-        
         <div className="grid grid-col-1 lg gap-8">
           <CategoryDistributionChart />
         </div>
       </main>
 
-      
-      {isPopupOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-md shadow-lg">
-            <h2 className="text-xl mb-4">Update Product</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-gray-700">Product Name</label>
-                <input
-                  type="text"
-                  name="prodName"
-                  value={formData.prodName}
-                  onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Product Description</label>
-                <input
-                  type="text"
-                  name="prodDescription"
-                  value={formData.prodDescription}
-                  onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Category</label>
-                <input
-                  type="text"
-                  name="productCategory"
-                  value={formData.productCategory}
-                  onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700">Price</label>
-                <input
-                  type="number"
-                  name="price"
-                  value={formData.price}
-                  onChange={handleInputChange}
-                  className="w-full border p-2 rounded"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={handleClosePopup}
-                  className="mr-4 bg-gray-300 text-gray-700 p-2 rounded"
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-                  Update Product
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {notification.visible && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification({ ...notification, visible: false })}
+        />
       )}
 
-      
-      {showAddProductsForm && (
-        <motion.div
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md">
-            <h2 className="text-lg font-bold text-gray-100 mb-4">Add Product</h2>
-            <form onSubmit={handleSaveProduct}>
-              <div className="mb-4">
-                <label className="block text-gray-400">Product Name</label>
-                <input
-                  type="text"
-                  name="prodName"
-                  value={newProducts.prodName}
-                  onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-400">Product Description</label>
-                <input
-                  type="text"
-                  name="prodDescription"
-                  value={newProducts.prodDescription}
-                  onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-400">Category</label>
-                <input
-                  type="text"
-                  name="productCategory"
-                  value={newProducts.productCategory}
-                  onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-400">Price</label>
-                <input
-                  type="number"
-                  name="price"
-                  value={newProducts.price}
-                  onChange={handleInputChangeForNewProduct}
-                  className="w-full bg-gray-700 text-white p-2 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setShowAddProductsForm(false)}
-                  className="bg-gray-600 text-white px-4 py-2 rounded-md mr-2"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md"
-                >
-                  Add Product
-                </button>
-              </div>
-            </form>
-          </div>
-        </motion.div>
-      )}
-
+      {/* Popup and Form Components */}
     </div>
   );
 };
