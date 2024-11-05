@@ -10,7 +10,7 @@ function AdminLoginPage() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8094/api/admin/login', {
+            const response = await fetch('https://billing-application-backend-production.up.railway.app/api/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
