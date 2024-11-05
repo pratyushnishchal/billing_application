@@ -21,10 +21,10 @@ const OverviewPage = () => {
 
     const fetchData = async () => {
         try {
-            const totalSalesResponse = await axios.get("http://localhost:8094/analysis/totalSales");
-            const totalCustomersResponse = await axios.get("http://localhost:8094/analysis/countCustomer");
-            const totalProductsResponse = await axios.get("http://localhost:8094/analysis/countProducts");
-            const totalPendingAmountResponse = await axios.get("http://localhost:8094/analysis/pending-amount");
+            const totalSalesResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/totalSales");
+            const totalCustomersResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/countCustomer");
+            const totalProductsResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/countProducts");
+            const totalPendingAmountResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/pending-amount");
 
             setData({
                 totalSales: totalSalesResponse.data,

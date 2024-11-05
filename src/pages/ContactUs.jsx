@@ -23,7 +23,7 @@ const ContactUs = () => {
         console.log("Form Submitted: ", formData);
 
         try {
-            const response = await fetch("http://localhost:8094/contactus", {
+            const response = await fetch("https://billing-application-backend-production.up.railway.app/contactus", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

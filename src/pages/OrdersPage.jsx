@@ -19,10 +19,10 @@ const OrdersPage = () => {
 
 	const fetchOrderStats = async () => {
 		try {
-			const totalOrdersResponse = await axios.get("http://localhost:8094/analysis/countInvoices");
-			const todayOrdersResponse = await axios.get("http://localhost:8094/analysis/todaysOrder");
-			const completedOrdersResponse = await axios.get("http://localhost:8094/analysis/completedOrders");
-			const totalRevenueResponse = await axios.get("http://localhost:8094/analysis/totalSales");
+			const totalOrdersResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/countInvoices");
+			const todayOrdersResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/todaysOrder");
+			const completedOrdersResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/completedOrders");
+			const totalRevenueResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/totalSales");
 
 			setOrderStats({
 				totalOrders: totalOrdersResponse.data.toString(),

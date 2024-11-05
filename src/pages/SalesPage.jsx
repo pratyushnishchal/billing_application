@@ -18,10 +18,10 @@ const SalesPage = () => {
     useEffect(() => {
         const fetchSalesStats = async () => {
             try {
-                const totalRevenueResponse = await axios.get("http://localhost:8094/analysis/totalSales");
-                const avgOrderValueResponse = await axios.get("http://localhost:8094/analysis/avgorderValue");
-                const todaysSaleResponse = await axios.get("http://localhost:8094/analysis/todaysSale");
-                const weekSalesResponse = await axios.get("http://localhost:8094/analysis/weekSales");
+                const totalRevenueResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/totalSales");
+                const avgOrderValueResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/avgorderValue");
+                const todaysSaleResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/todaysSale");
+                const weekSalesResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/weekSales");
 
                 setSalesStats({
                     totalRevenue: totalRevenueResponse.data,

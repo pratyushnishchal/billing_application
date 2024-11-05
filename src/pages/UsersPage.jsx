@@ -29,10 +29,10 @@ const UsersPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const totalCustomersResponse = await axios.get("http://localhost:8094/analysis/countCustomer");
-        const customersAddedTodayResponse = await axios.get("http://localhost:8094/analysis/todayscustomer");
-        const totalAccountantsResponse = await axios.get("http://localhost:8094/analysis/countAccountant");
-        const customerAddedweekResponse = await axios.get("http://localhost:8094/analysis/weeksCustomer");
+        const totalCustomersResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/countCustomer");
+        const customersAddedTodayResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/todayscustomer");
+        const totalAccountantsResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/countAccountant");
+        const customerAddedweekResponse = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/weeksCustomer");
 
         setUserStats({
           totalUsers: totalCustomersResponse.data,
@@ -41,10 +41,10 @@ const UsersPage = () => {
           customerAddedweek: customerAddedweekResponse.data
         });
 
-        const usersResponse = await axios.get("http://localhost:8094/api/users/displayCus");
+        const usersResponse = await axios.get("https://billing-application-backend-production.up.railway.app/api/users/displayCus");
         setUsers(usersResponse.data);
 
-        const accountantsResponse = await axios.get("http://localhost:8094/api/admin/displayAcc");
+        const accountantsResponse = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/displayAcc");
         setAccountants(accountantsResponse.data);
       } catch (error) {
         console.error("There was an error fetching the user stats!", error);
@@ -90,9 +90,9 @@ const UsersPage = () => {
 
   const handleSaveUser = () => {
     axios
-      .put(`http://localhost:8094/api/users/updateCustomer/${editUser.id}`, editUser)
+      .put(`https://billing-application-backend-production.up.railway.app/api/users/updateCustomer/${editUser.id}`, editUser)
       .then(() => {
-        return axios.get("http://localhost:8094/api/users/displayCus");
+        return axios.get("https://billing-application-backend-production.up.railway.app/api/users/displayCus");
       })
       .then((response) => {
         setUsers(response.data); // Update users state with the fetched data
@@ -106,9 +106,9 @@ const UsersPage = () => {
   const handleSaveAccountant = () => {
     
     axios
-      .put(`http://localhost:8094/api/admin/updateAccountant/${editAccountant.id}`, editAccountant)
+      .put(`https://billing-application-backend-production.up.railway.app/api/admin/updateAccountant/${editAccountant.id}`, editAccountant)
       .then(() => {
-        return axios.get("http://localhost:8094/api/admin/displayAcc");
+        return axios.get("https://billing-application-backend-production.up.railway.app/api/admin/displayAcc");
       })
       .then((response) => {
         setAccountants(response.data); // Update accountants state with the fetched data
@@ -144,9 +144,9 @@ const UsersPage = () => {
     setError(''); // Reset any previous error state
 
     axios
-      .post("http://localhost:8094/api/users/createCustomer", newCustomer)
+      .post("https://billing-application-backend-production.up.railway.app/api/users/createCustomer", newCustomer)
       .then(() => {
-        return axios.get("http://localhost:8094/api/users/displayCus");
+        return axios.get("https://billing-application-backend-production.up.railway.app/api/users/displayCus");
       })
       .then((response) => {
         setUsers(response.data); // Update users state with the fetched data
@@ -165,9 +165,9 @@ const UsersPage = () => {
   
   const handleCreateAccountant = async () => {
     try {
-      await axios.post("http://localhost:8094/api/admin/createAccountant", newAccountant);
+      await axios.post("https://billing-application-backend-production.up.railway.app/api/admin/createAccountant", newAccountant);
       // alert("Product added successfully!");
-      const response = await axios.get("http://localhost:8094/api/admin/displayAcc");
+      const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/displayAcc");
       setAccountants(response.data); // Update users state with the fetched data
         setShowAddAccountantForm(false); // Close the add customer form
         setNewAccountant({ name: "", email: "", city: "", mobileNumber: "", password: "" }); // Reset the new product state

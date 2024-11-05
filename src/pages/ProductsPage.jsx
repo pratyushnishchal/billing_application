@@ -33,16 +33,16 @@ const ProductsPage = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const totalProductsResponse = await fetch(`http://localhost:8094/analysis/countProducts`);
+        const totalProductsResponse = await fetch(`https://billing-application-backend-production.up.railway.app/analysis/countProducts`);
         const totalProducts = await totalProductsResponse.json();
 
-        const avgPriceResponse = await fetch(`http://localhost:8094/analysis/avgpricePerProd`);
+        const avgPriceResponse = await fetch(`https://billing-application-backend-production.up.railway.app/analysis/avgpricePerProd`);
         const avgPrice = await avgPriceResponse.json();
 
-        const inventoryValueResponse = await fetch(`http://localhost:8094/analysis/invValue`);
+        const inventoryValueResponse = await fetch(`https://billing-application-backend-production.up.railway.app/analysis/invValue`);
         const inventoryValue = await inventoryValueResponse.json();
 
-        const totalRevenueResponse = await fetch(`http://localhost:8094/analysis/totalSales`);
+        const totalRevenueResponse = await fetch(`https://billing-application-backend-production.up.railway.app/analysis/totalSales`);
         const totalRevenue = await totalRevenueResponse.json();
 
         setStats({
@@ -58,7 +58,7 @@ const ProductsPage = () => {
 
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8094/api/admin/viewallproducts");
+        const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -105,9 +105,9 @@ const ProductsPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8094/api/admin/updateProduct/${selectedProduct.id}`, formData);
+      await axios.put(`https://billing-application-backend-production.up.railway.app/api/admin/updateProduct/${selectedProduct.id}`, formData);
       handleClosePopup();
-      const response = await axios.get("http://localhost:8094/api/admin/viewallproducts");
+      const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
       setProducts(response.data);
     } catch (error) {
       console.error("Failed to update product", error);
@@ -116,8 +116,8 @@ const ProductsPage = () => {
 
   const handleSaveProduct = async () => {
     try {
-      await axios.post("http://localhost:8094/api/admin/addProducts", newProducts);
-      const response = await axios.get("http://localhost:8094/api/admin/viewallproducts");
+      await axios.post("https://billing-application-backend-production.up.railway.app/api/admin/addProducts", newProducts);
+      const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
       setProducts(response.data); 
       setShowAddProductsForm(false); 
       setNewProducts({ prodName: "", price: "", prodDescription: "", productCategory: "" }); 

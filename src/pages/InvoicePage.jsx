@@ -12,14 +12,14 @@ const InvoicePage = () => {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    fetch("http://localhost:8094/api/users/displayCus")
+    fetch("https://billing-application-backend-production.up.railway.app/api/users/displayCus")
       .then((response) => response.json())
       .then((data) => {
         setClients(data);
         console.log("Fetched Clients:", data);
       });
 
-    fetch("http://localhost:8094/api/admin/viewallproducts")
+    fetch("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -68,7 +68,7 @@ const InvoicePage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8094/api/accountant/createInvoice", {
+    fetch("https://billing-application-backend-production.up.railway.app/api/accountant/createInvoice", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
