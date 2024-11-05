@@ -21,8 +21,8 @@ const WelcomePage = () => {
           <nav className="hidden md:flex space-x-4 lg:space-x-8">
             <NavLink text="Home" href="/" />
             <NavLink text="Features" href="#features" />
-            <NavLink text="About" href="https://invoicify-billingapplication-k1d338582.vercel.app/about" />
-            <NavLink text="Contact" href="https://invoicify-billingapplication-k1d338582.vercel.app/contact" />
+            <NavLink text="About" href="/about" />
+            <NavLink text="Contact" href="/contact" />
             <NavLink text="Login" href="#login" className="mr-2" />
           </nav>
           {/* Hamburger Menu for Mobile */}
@@ -61,13 +61,13 @@ const WelcomePage = () => {
               />
               <NavLink
                 text="About"
-                href="https://invoicify-billingapplication-k1d338582.vercel.app/about"
+                href="/about"
                 className="w-full"
                 onClick={toggleMenu}
               />
               <NavLink
                 text="Contact"
-                href="https://invoicify-billingapplication-k1d338582.vercel.app/contact"
+                href="/contact"
                 className="w-full"
                 onClick={toggleMenu}
               />
@@ -235,7 +235,7 @@ const loginOptions = [
     description: "Access all features as an administrator.",
     buttonText: "Admin Login",
     bgColor: "bg-blue-500",
-    link: "https://invoicify-billingapplication-k1d338582.vercel.app/admin-login",
+    link: "/admin-login",
     icon: <FaUserShield className="text-4xl" />,
     iconColor: "text-blue-600",
   },
@@ -244,7 +244,7 @@ const loginOptions = [
     description: "Manage invoices and client accounts.",
     buttonText: "Accountant Login",
     bgColor: "bg-green-500",
-    link: "https://invoicify-billingapplication-k1d338582.vercel.app/accountant-login",
+    link: "/accountant-login",
     icon: <FaUserTie className="text-4xl text-green-600" />,
     iconColor: "text-green-600",
   },
@@ -253,7 +253,7 @@ const loginOptions = [
     description: "View and manage your billing information.",
     buttonText: "Customer Login",
     bgColor: "bg-yellow-500",
-    link: "https://invoicify-billingapplication-k1d338582.vercel.app/customer-login",
+    link: "/customer-login",
     icon: <FaUserCircle className="text-4xl text-yellow-600" />,
     iconColor: "text-yellow-600",
   },

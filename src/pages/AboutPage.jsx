@@ -4,9 +4,6 @@ import { FaRegClock, FaUsers, FaRegCheckCircle } from "react-icons/fa"; // Optio
 import { NavLink as RouterNavLink } from "react-router-dom"; // Import NavLink from react-router-dom
 
 const AboutPage = () => {
-    // Fetch the backend URL from the environment variable
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
     return (
         <div className="flex flex-col h-screen">
             {/* Header */}
@@ -16,11 +13,11 @@ const AboutPage = () => {
                         Invoicify
                     </h1>
                     <nav className="flex space-x-8">
-                        <NavLink text="Home" to="/" />
-                        <NavLink text="Features" to="/#features" />
-                        <NavLink text="About" to="/about" />
-                        <NavLink text="Contact" to="/contact" />
-                        <NavLink text="Login" to="/#login" className="mr-4" />
+                        <NavLink text="Home" href="/" />
+                        <NavLink text="Features" href="/#features" />
+                        <NavLink text="About" href="/about" />
+                        <NavLink text="Contact" href="/contact" />
+                        <NavLink text="Login" href="/#login" className="mr-4" />
                     </nav>
                 </div>
             </header>
@@ -63,10 +60,10 @@ const AboutPage = () => {
     );
 };
 
-// Custom NavLink component with updated 'to' attribute
-const NavLink = ({ text, to, className }) => (
+// Custom NavLink component
+const NavLink = ({ text, href, className }) => (
     <RouterNavLink
-        to={to} // Updated to use 'to'
+        to={href}
         className={`text-lg hover:bg-gray-700 hover:text-white transition duration-300 py-2 px-4 rounded-md ${className}`}
     >
         {text}

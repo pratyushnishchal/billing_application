@@ -10,7 +10,7 @@ function AdminLoginPage() {
         e.preventDefault();
 
         try {
-            const response = await fetch('https://billing-application-backend-production.up.railway.app/api/admin/login', {
+            const response = await fetch('/api/admin/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
@@ -21,7 +21,7 @@ function AdminLoginPage() {
                 window.localStorage.setItem("userType", data.role); 
                 window.localStorage.setItem("loggedIn", "true");
                 localStorage.setItem("id", data.id);
-                navigate('https://invoicify-billingapplication-k1d338582.vercel.app/dashboard');  // Redirect to the dashboard
+                navigate('/dashboard');  // Redirect to the dashboard
             } else {
                 alert("Invalid credentials");
             }
