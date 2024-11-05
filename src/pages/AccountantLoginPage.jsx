@@ -10,7 +10,7 @@ function AccountantLoginPage() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8094/api/users/accLogin', {
+            const response = await fetch('https://billing-application-backend-production.up.railway.app/api/users/accLogin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })

@@ -10,7 +10,7 @@ function CustomerLoginPage() {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:8094/customerLogin', {
+            const response = await fetch('https://billing-application-backend-production.up.railway.app/customerLogin', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 // credentials: 'include',  // This allows cookies/session information to be included
