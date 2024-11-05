@@ -30,6 +30,7 @@ const ProductsPage = () => {
     price: "",
   });
   const [products, setProducts] = useState([]); 
+  const [notification, setNotification] = useState("");
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -101,7 +102,10 @@ const ProductsPage = () => {
     setIsPopupOpen(false);
     setSelectedProduct(null);
   };
-
+  const showNotification = (message) => {
+    setNotification(message);
+    setTimeout(() => setNotification(""), 3000); // Clears the message after 3 seconds
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -109,6 +113,7 @@ const ProductsPage = () => {
       handleClosePopup();
       const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
       setProducts(response.data);
+      showNotification("Product updated successfully!");
     } catch (error) {
       console.error("Failed to update product", error);
     }
@@ -121,6 +126,7 @@ const ProductsPage = () => {
       setProducts(response.data); 
       setShowAddProductsForm(false); 
       setNewProducts({ prodName: "", price: "", prodDescription: "", productCategory: "" }); 
+      showNotification("Product added successfully!");
     } catch (error) {
       console.error("There was an error adding the product!", error);
       alert("There was an error adding the product! Please try again.");
@@ -130,6 +136,11 @@ const ProductsPage = () => {
   return (
     <div className="flex-1 overflow-auto relative z-10">
       <Header title="Products" />
+      {notification && (
+        <div className="fixed top-5 right-5 bg-green-500 text-white py-2 px-4 rounded-lg shadow-md">
+          {notification}
+        </div>
+      )}
 
       <main className="max-w-7xl mx-auto py-6 px-4 lg:px-8">
         <motion.div
