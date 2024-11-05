@@ -17,7 +17,7 @@ const OrdersTable = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const response = await fetch("http://localhost:8094/api/accountant/getAllInvoice");
+                const response = await fetch("https://billing-application-backend-production.up.railway.app/api/accountant/getAllInvoice");
                 if (!response.ok) {
                     throw new Error("Failed to fetch orders");
                 }

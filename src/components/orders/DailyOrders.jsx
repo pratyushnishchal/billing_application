@@ -10,7 +10,7 @@ const DailyOrders = () => {
 	useEffect(() => {
 		const fetchDailyOrders = async () => {
 			try {
-				const response = await axios.get('http://localhost:8094/analysis/daily-orders'); 
+				const response = await axios.get('https://billing-application-backend-production.up.railway.app/analysis/daily-orders'); 
 				setDailyOrdersData(response.data);
 				setLoading(false);
 			} catch (error) {

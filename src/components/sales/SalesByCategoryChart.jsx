@@ -11,7 +11,7 @@ const SalesByCategoryChart = () => {
     useEffect(() => {
         const fetchCategoryData = async () => {
             try {
-                const response = await axios.get("http://localhost:8094/analysis/salesByCategory");
+                const response = await axios.get("https://billing-application-backend-production.up.railway.app/analysis/salesByCategory");
                 const formattedData = Object.entries(response.data).map(([name, value]) => ({
                     name,
                     value,

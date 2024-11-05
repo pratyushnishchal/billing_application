@@ -21,7 +21,7 @@ const CustomerSetting = () => {
     useEffect(() => {
         const fetchCustomerProfile = async () => {
             try {
-                const response = await fetch(`http://localhost:8094/api/users/customerinfo/${customerId}`);
+                const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/users/customerinfo/${customerId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch customer profile');
                 }
@@ -52,7 +52,7 @@ const CustomerSetting = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8094/api/users/updateCustomer/${customerId}`, {
+            const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/users/updateCustomer/${customerId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const CustomerSetting = () => {
             return;
         }
         try {
-            const response = await fetch(`http://localhost:8094/${customerId}/add-to-wallet?amount=${walletAmount}`, {
+            const response = await fetch(`https://billing-application-backend-production.up.railway.app/${customerId}/add-to-wallet?amount=${walletAmount}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

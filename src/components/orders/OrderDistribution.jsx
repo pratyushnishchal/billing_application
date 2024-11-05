@@ -11,7 +11,7 @@ const OrderDistribution = () => {
     useEffect(() => {
         const fetchOrderStatusData = async () => {
             try {
-                const response = await axios.get('http://localhost:8094/chart/paymentStatus-piechart');
+                const response = await axios.get('https://billing-application-backend-production.up.railway.app/chart/paymentStatus-piechart');
                 const data = response.data;
                 const formattedData = Object.entries(data).map(([name, value]) => ({ name, value }));
                 setOrderStatusData(formattedData); 

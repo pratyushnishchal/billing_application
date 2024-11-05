@@ -18,7 +18,7 @@ const AccountantProfile = () => {
     useEffect(() => {
         const fetchAccountantProfile = async () => {
             try {
-                const response = await fetch(`http://localhost:8094/api/admin/accountantinfo/${accountantId}`);
+                const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/admin/accountantinfo/${accountantId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch accountant profile');
                 }
@@ -49,7 +49,7 @@ const AccountantProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8094/api/admin/updateAccountant/${accountantId}`, {
+            const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/admin/updateAccountant/${accountantId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

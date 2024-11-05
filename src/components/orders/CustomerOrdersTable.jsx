@@ -24,7 +24,7 @@ const CustomerOrdersTable = () => {
             }
 
             try {
-                const response = await fetch(`http://localhost:8094/invoice/${customerId}`);
+                const response = await fetch(`https://billing-application-backend-production.up.railway.app/invoice/${customerId}`);
                 const data = await response.json();
 
                 if (data.message) {

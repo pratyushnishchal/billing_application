@@ -23,7 +23,7 @@ const OrderHistory = () => {
             }
 
             try {
-                const response = await fetch(`http://localhost:8094/orderhistory/${customerId}`);
+                const response = await fetch(`https://billing-application-backend-production.up.railway.app/orderhistory/${customerId}`);
                 const data = await response.json();
 
                 if (data.message) {

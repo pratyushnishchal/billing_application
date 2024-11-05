@@ -11,7 +11,7 @@ const UsersTable = ({ onEditClick, onAddCustomer }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:8094/api/users/displayCus");
+        const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/users/displayCus");
         setUsers(response.data);
       } catch (error) {
         console.error("There was an error fetching the data!", error);
@@ -28,7 +28,7 @@ const UsersTable = ({ onEditClick, onAddCustomer }) => {
 
   const deleteUser = async (userId) => {
     try {
-      await axios.delete(`http://localhost:8094/api/users/deleteCus/${userId}`);
+      await axios.delete(`https://billing-application-backend-production.up.railway.app/api/users/deleteCus/${userId}`);
       setUsers(users.filter((user) => user.id !== userId));
     } catch (error) {
       console.error("There was an error deleting the user!", error);

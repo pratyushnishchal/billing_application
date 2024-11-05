@@ -26,7 +26,7 @@ const PaymentPopup = ({ isOpen, onClose, order }) => {
         };
 
         try {
-            const response = await fetch(`http://localhost:8094/wallet?customerId=${customerId}&invoiceId=${invoiceId}`, {
+            const response = await fetch(`https://billing-application-backend-production.up.railway.app/wallet?customerId=${customerId}&invoiceId=${invoiceId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -11,7 +11,7 @@ const AccountantTable = ({ onEditClick }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8094/api/admin/displayAcc")
+      .get("https://billing-application-backend-production.up.railway.app/api/admin/displayAcc")
       .then((response) => {
         setUsers(response.data);
         setFilteredUsers(response.data);
@@ -34,7 +34,7 @@ const AccountantTable = ({ onEditClick }) => {
 
   const deleteUser = (userId) => {
     axios
-      .delete(`http://localhost:8094/api/admin/deleteAcc/${userId}`)
+      .delete(`https://billing-application-backend-production.up.railway.app/api/admin/deleteAcc/${userId}`)
       .then(() => {
         setUsers(users.filter((user) => user.id !== userId));
         setFilteredUsers(filteredUsers.filter((user) => user.id !== userId));

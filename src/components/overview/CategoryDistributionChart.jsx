@@ -12,7 +12,7 @@ const CategoryDistributionChart = () => {
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {
-        const response = await axios.get("http://localhost:8094/chart/category-distribution"); 
+        const response = await axios.get("https://billing-application-backend-production.up.railway.app/chart/category-distribution"); 
         
         const data = Object.entries(response.data).map(([key, value]) => ({
           name: key, 

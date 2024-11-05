@@ -16,7 +16,7 @@ const Profile = () => {
     useEffect(() => {
         const fetchAdminProfile = async () => {
             try {
-                const response = await fetch(`http://localhost:8094/api/admin/getAdminDetails/${adminId}`);
+                const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/admin/getAdminDetails/${adminId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch admin profile');
                 }
@@ -46,7 +46,7 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`http://localhost:8094/api/admin/updateAdmin/${adminId}`, {
+            const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/admin/updateAdmin/${adminId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

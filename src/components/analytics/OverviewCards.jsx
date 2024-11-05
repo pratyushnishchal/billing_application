@@ -19,10 +19,10 @@ const OverviewCards = () => {
     const fetchData = async () => {
       try {
         const [revenueRes, usersRes, ordersRes, pageViewsRes] = await Promise.all([
-          axios.get('http://localhost:8094/analysis/totalSales'),
-          axios.get('http://localhost:8094/analysis/countCustomer'),
-          axios.get('http://localhost:8094/analysis/todaysOrder'),
-          axios.get('http://localhost:8094/analysis/countInvoices')
+          axios.get('https://billing-application-backend-production.up.railway.app/analysis/totalSales'),
+          axios.get('https://billing-application-backend-production.up.railway.app/analysis/countCustomer'),
+          axios.get('https://billing-application-backend-production.up.railway.app/analysis/todaysOrder'),
+          axios.get('https://billing-application-backend-production.up.railway.app/analysis/countInvoices')
         ]);
 
         // Set the fetched data into state

@@ -13,7 +13,7 @@ const ProductsTable = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8094/api/admin/viewallproducts");
+        const response = await axios.get("https://billing-application-backend-production.up.railway.app/api/admin/viewallproducts");
         if (Array.isArray(response.data)) {
           setProducts(response.data);
           setFilteredProducts(response.data);
@@ -44,7 +44,7 @@ const ProductsTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8094/api/admin/deleteProduct/${id}`);
+      await axios.delete(`https://billing-application-backend-production.up.railway.app/api/admin/deleteProduct/${id}`);
       const updatedProducts = products.filter((product) => product.id !== id);
       setProducts(updatedProducts);
       setFilteredProducts(updatedProducts);
@@ -61,7 +61,7 @@ const ProductsTable = () => {
   const handleUpdateProduct = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:8094/api/admin/updateProduct/${editProduct.id}`,
+        `https://billing-application-backend-production.up.railway.app/api/admin/updateProduct/${editProduct.id}`,
         editProduct
       );
       const updatedProducts = products.map((product) =>
