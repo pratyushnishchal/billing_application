@@ -65,7 +65,7 @@ const OrdersTable = () => {
     const handleDelete = async (invoiceId) => {
         if (window.confirm("Are you sure you want to delete this invoice?")) {
             try {
-                const response = await fetch(`http://localhost:8094/api/accountant/deleteInvoice/${invoiceId}`, {
+                const response = await fetch(`https://billing-application-backend-production.up.railway.app/api/accountant/deleteInvoice/${invoiceId}`, {
                     method: 'DELETE',
                 });
                 if (!response.ok) {
