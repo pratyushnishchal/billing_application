@@ -36,7 +36,7 @@ const OverviewPage = () => {
 
     useEffect(() => {
         // Check if the user just logged in
-        const isUserLoggedIn = window.localStorage.getItem("isUserLoggedIn");
+        const isUserLoggedIn = window.localStorage.getItem("userType");
         if (isUserLoggedIn === "true") {
             // Refresh the page
             window.location.reload();
