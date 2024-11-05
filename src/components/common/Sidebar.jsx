@@ -1,5 +1,5 @@
-import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, FileText, LogOut,Home,History   } from "lucide-react";
-import { useState } from "react";
+import { BarChart2, DollarSign, Menu, Settings, ShoppingBag, ShoppingCart, TrendingUp, Users, FileText, LogOut, Home, History } from "lucide-react";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,13 +20,32 @@ const SIDEBAR_ITEMS = [
 	{ name: "Order History", icon: History , color: "yellow", href: "/order-history", roles: ["ROLE_CUSTOMER"] },
 	{ name: "Analytics", icon: TrendingUp, color: "#3B82F6", href: "/analytics", roles: ["ROLE_ADMIN"] },
 	{ name: "Settings", icon: Settings, color: "#6EE7B7", href: "/settings", roles: ["ROLE_ADMIN","ROLE_ACCOUNTANT","ROLE_CUSTOMER"] },
-
 ];
 
 const Sidebar = () => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 	const navigate = useNavigate();
 	const userType = window.localStorage.getItem("userType");
+
+	// Effect to set initial sidebar state based on screen width
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 768) {
+				setIsSidebarOpen(false); // Close sidebar on mobile view
+			} else {
+				setIsSidebarOpen(true); // Open sidebar on larger screens
+			}
+		};
+
+		// Run on component mount
+		handleResize();
+
+		// Attach resize listener
+		window.addEventListener("resize", handleResize);
+
+		// Clean up listener on component unmount
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
 
 	const handleLogout = () => {
 		localStorage.removeItem("loggedIn");
