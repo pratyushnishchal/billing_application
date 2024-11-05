@@ -55,7 +55,7 @@ const OverviewPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
                 >
-                    <StatCard name='Total Sales' icon={Zap} value={`₹${data.totalSales.toFixed(2)} || 0`} color='#6366F1' />
+                    <StatCard name='Total Sales' icon={Zap} value={`₹${data.totalSales.toFixed(2)}`} color='#6366F1' />
                     <StatCard name='Total Customers' icon={Users} value={data.totalCustomers.toString()} color='#8B5CF6' />
                     <StatCard name='Total Products' icon={ShoppingBag} value={data.totalProducts.toString()} color='#EC4899' />
                     <StatCard name='Total Pending Amt.' icon={BarChart2} value={`₹${data.totalPendingAmount.toFixed(2)}`} color='#10B981' />
