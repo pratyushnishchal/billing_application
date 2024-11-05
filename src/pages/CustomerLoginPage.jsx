@@ -69,7 +69,7 @@ function CustomerLoginPage() {
                     </button>
                 </form>
                 <p className="mt-4 text-sm text-center text-gray-400">
-                    &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+                    &copy; {new Date().getFullYear()} Invoicify. All rights reserved.
                 </p>
             </div>
         </div>    );
