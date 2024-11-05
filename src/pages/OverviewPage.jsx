@@ -35,17 +35,18 @@ const OverviewPage = () => {
     };
 
     useEffect(() => {
-        // Fetch data on mount
-        fetchData();
-
-        // Optionally set an interval to refresh data every minute
-        const interval = setInterval(() => {
+        // Check if the user just logged in
+        const isUserLoggedIn = window.localStorage.getItem("isUserLoggedIn");
+        if (isUserLoggedIn === "true") {
+            // Refresh the page
+            window.location.reload();
+            // Remove the flag so it does not reload again on subsequent renders
+            window.localStorage.removeItem("isUserLoggedIn");
+        } else {
+            // Fetch data if not reloading
             fetchData();
-        }, 60000); // 60000 ms = 1 minute
-
-        // Cleanup interval on component unmount
-        return () => clearInterval(interval);
-    }, []); // Empty dependency array means this runs once on mount
+        }
+    }, []);
 
     return (
         <div className='flex-1 overflow-auto'>
